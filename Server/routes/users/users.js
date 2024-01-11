@@ -13,11 +13,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 router.get('/getusers', (req, res) => {
   // Aquí debes obtener los datos de usuarios desde tu base de datos o alguna otra fuente
-  const users = [
-    { dni: 1, name: 'Usuario 1', lastname: 'Apellido 1', borndate: '01/01/2000', phone: '991210393', email: 'example@hotmail.com', bank: 'banco xd', account_number: '123456789' },
-    { dni: 2, name: 'Usuario 2', lastname: 'Apellido 2', borndate: '01/01/2000', phone: '991210393', email: 'example2@gmail.com', bank: 'banco interesante', account_number: '123456789' },
-    // ... otros usuarios
-  ];
   db.all('SELECT * FROM clientes', (err, users) => {
     if (err) {
       console.error('Error al ejecutar la consulta', err.message);
