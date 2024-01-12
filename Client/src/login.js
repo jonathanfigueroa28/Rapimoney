@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
         onLogin();
       } else {
         // Manejar el caso de inicio de sesión fallido
-        alert('Login fallido. Verifica tus credenciales.');
+        alert('Errror. Verifica tus credenciales. ("admin","123")');
       }
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
