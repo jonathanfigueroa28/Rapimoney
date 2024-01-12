@@ -1,6 +1,6 @@
-/* formulario
 /* App.css */
 
+/* Formulario */
 form {
   max-width: 400px;
   margin: 20px auto;
@@ -22,31 +22,34 @@ input {
   box-sizing: border-box;
 }
 
-button.add{
-  background-color: #4caf50;
+button.add {
+  background-color: #2196f3; /* Azul primario */
   color: white;
   padding: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 16px; /* Añadido para dar espacio después del botón */
 }
-button.add:hover {
-  background-color: #45a049;
-}
-button.close{
-  background-color: #f44336;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-button.close:hover {
-  background-color: #da190b;
-}
-/* tablas forms
-/* App.css */
 
+button.add:hover {
+  background-color: #1565c0; /* Azul oscuro al pasar el ratón */
+}
+
+button.close {
+  background-color: #f44336; /* Rojo primario */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.close:hover {
+  background-color: #ba0c2f; /* Rojo oscuro al pasar el ratón */
+}
+
+/* Tablas */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -58,8 +61,34 @@ th, td {
   padding: 10px;
   text-align: left;
 }
-
 th {
-  background-color: #4caf50;
+  background-color: #2196f3; /* Azul primario */
   color: white;
+}
+
+/* Estilos para el botón de submit */
+form button[type="submit"] {
+  background-color: #2196f3;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #1565c0;
+}
+
+/* Media Query para pantallas pequeñas (ej. teléfonos) */
+@media only screen and (max-width: 600px) {
+  form {
+    max-width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  /* Agrega más ajustes según sea necesario */
 }

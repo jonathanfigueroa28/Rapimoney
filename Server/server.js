@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to the application." });
 });
 app.use('/api/user', require('./routes/users/users')); 
-app.use('/api/add', require('./routes/adduser/adduser'));
+app.use('/api/login', require('./routes/login/login'));
 
 
   
