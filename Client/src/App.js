@@ -1,6 +1,5 @@
-// En tu componente React (por ejemplo, src/App.js)
 import React, { useState, useEffect } from 'react';
-import $ from 'jquery'; // Importa jQuery
+import $ from 'jquery';
 import './App.css';
 
 const App = () => {
@@ -20,7 +19,7 @@ const App = () => {
   const [textButton, setTextButton] = useState("Agregar Usuario");
   const [visibleUsers, setVisibleUsers] = useState(10);
   const [search, setSearch] = useState({
-    tipo: '',
+    tipo: 'nombres',
     busqueda: ''
   });
 
@@ -65,7 +64,7 @@ const App = () => {
   const handleSearch = (e) => {
     console.log(search);
     e.preventDefault();
-    if (search.tipo && search.busqueda) {
+    
       $.ajax({
         url: 'http://localhost:3001/api/user/searchuser',
         method: 'POST',
@@ -73,6 +72,7 @@ const App = () => {
         data: JSON.stringify(search),
         success: function (data) {
           setUsers(data);
+          
           if(data.length === 0){
             alert('No se encontraron resultados');
           }
@@ -81,10 +81,27 @@ const App = () => {
           console.error('Error al obtener datos de usuarios:', error);
         }
       });
-    } else {
-      console.error('Campos no válidos en el formulario', search);
-    }
+    
   };
+  const handleSearchAll = (e) => {
+    setSearch({
+      tipo: 'nombres',
+      busqueda: ''
+    });
+    e.preventDefault();
+    $.ajax({
+      url: 'http://localhost:3001/api/user/getusers',
+      method: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        setUsers(data);
+      },
+      error: function (error) {
+        console.error('Error al obtener datos de usuarios:', error);
+      }
+    });
+  };
+
 
 
   const handleSubmitForm = (e) => {
@@ -127,7 +144,7 @@ const App = () => {
   return (
     <div>
       <h1>Bienvenido admin</h1>
-      <div>
+      <div className="content-container">
         <button className={classButton} onClick={handleToggleForm}> {textButton} </button>
         {showForm && (
           <div>
@@ -155,18 +172,19 @@ const App = () => {
         )}
       </div>
       <h2>Lista de usuarios</h2>
-      <div>
-        <label htmlFor="tipo">Tipo de busqueda</label>
+      <div className="search-section">
+        <label htmlFor="tipo">Tipo de búsqueda</label>
         <select name="tipo" id="tipo" value={search.tipo} onChange={handleInputChangeSearch}>
-          <option value="dni">Busqueda por DNI</option>
-          <option value="nombres">Busqueda por NOMBRES</option>
+          <option value="dni">Búsqueda por DNI</option>
+          <option value="nombres">Búsqueda por NOMBRES</option>
         </select>
-        <label htmlFor="busqueda">Busqueda</label>
+        <label htmlFor="busqueda">Búsqueda</label>
         <input type="text" name="busqueda" id="busqueda" value={search.busqueda} onChange={handleInputChangeSearch}/>
-        
+        <button onClick={handleSearch}>Buscar</button>
+        <button onClick={handleSearchAll}>Mostrar todos</button>
       </div>
-      <button onClick={handleSearch}>Buscar</button>
-        
+      
+      
       <table border="1">
         <thead>
           <tr>

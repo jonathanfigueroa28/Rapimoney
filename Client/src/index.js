@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';  // Asegúrate de importar desde "react-dom/client"
+import ReactDOM from 'react-dom/client';  
 import './index.css';
 import App from './App';
 import Login from './login';
@@ -23,6 +23,6 @@ const Root = () => {
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));  // Cambié "ReactDOM.render" por "ReactDOM.createRoot"
+const root = ReactDOM.createRoot(document.getElementById('root'));  
 root.render(<Root />);
 reportWebVitals();

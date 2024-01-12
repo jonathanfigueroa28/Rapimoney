@@ -1,6 +1,3 @@
-/* App.css */
-
-/* Formulario */
 form {
   max-width: 400px;
   margin: 20px auto;
@@ -23,21 +20,21 @@ input {
 }
 
 button.add {
-  background-color: #2196f3; /* Azul primario */
+  background-color: #2196f3; 
   color: white;
   padding: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 16px; /* Añadido para dar espacio después del botón */
+  margin-bottom: 16px; 
 }
 
 button.add:hover {
-  background-color: #1565c0; /* Azul oscuro al pasar el ratón */
+  background-color: #1565c0; 
 }
 
 button.close {
-  background-color: #f44336; /* Rojo primario */
+  background-color: #f44336; 
   color: white;
   padding: 10px;
   border: none;
@@ -46,14 +43,13 @@ button.close {
 }
 
 button.close:hover {
-  background-color: #ba0c2f; /* Rojo oscuro al pasar el ratón */
+  background-color: #ba0c2f;
 }
 
-/* Tablas */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin: 20px auto; 
 }
 
 th, td {
@@ -61,12 +57,12 @@ th, td {
   padding: 10px;
   text-align: left;
 }
+
 th {
-  background-color: #2196f3; /* Azul primario */
+  background-color: #2196f3; 
   color: white;
 }
 
-/* Estilos para el botón de submit */
 form button[type="submit"] {
   background-color: #2196f3;
   color: white;
@@ -80,32 +76,77 @@ form button[type="submit"]:hover {
   background-color: #1565c0;
 }
 .seemore {
-  background-color: #4caf50; /* Color de fondo */
-  color: white; /* Color del texto */
-  border: none; /* Sin borde */
-  padding: 10px 15px; /* Relleno interno */
-  text-align: center; /* Alineación de texto */
-  text-decoration: none; /* Sin subrayado */
+  background-color: #4caf50;
+  color: white; 
+  border: none; 
+  padding: 10px 15px; 
+  text-align: center; 
+  text-decoration: none; 
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 4px; /* Bordes redondeados */
+  border-radius: 4px; 
 }
 
 .seemore:hover {
-  background-color: #45a049; /* Cambiar color de fondo al pasar el ratón */
+  background-color: #45a049; 
 }
 
-/* Media Query para pantallas pequeñas (ej. teléfonos) */
+.search-section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  background-color: #f0f0f0; 
+  padding: 10px; 
+  border-radius: 8px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.search-section label {
+  margin-right: 10px;
+}
+
+.search-section select,
+.search-section input[type="text"],
+.search-section button {
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-section select {
+  background-color: #fff; 
+}
+
+.search-section input[type="text"] {
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+.search-section button {
+  background-color: #2196f3; 
+  color: white;
+}
+
+.search-section button:hover {
+  background-color: #1565c0;
+}
+
+.content-container {
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 20px; 
+}
 @media only screen and (max-width: 600px) {
   form {
     max-width: 100%;
   }
-
-  table {
-    width: 100%;
+  .content-container {
+    max-width: 100%;
+    padding: 10px; 
   }
-
-  /* Agrega más ajustes según sea necesario */
 }

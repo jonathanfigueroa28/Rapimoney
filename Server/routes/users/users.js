@@ -12,7 +12,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
 });
 
 router.get('/getusers', (req, res) => {
-  // Aquí debes obtener los datos de usuarios desde tu base de datos o alguna otra fuente
   db.all('SELECT * FROM clientes', (err, users) => {
     if (err) {
       console.error('Error al ejecutar la consulta', err.message);
@@ -24,7 +23,6 @@ router.get('/getusers', (req, res) => {
  
 });
 router.post('/searchuser', (req, res) => {
-  // Aquí debes obtener los datos de usuarios desde tu base de datos o alguna otra fuente
   const Datos = req.body;
   db.all(`SELECT * FROM clientes WHERE ${Datos.tipo} like '${Datos.busqueda}%'`, (err, users) => {
     if (err) {
@@ -37,10 +35,8 @@ router.post('/searchuser', (req, res) => {
  
 });
 router.post('/adduser', (req, res) => {
-  // Obtener datos del cuerpo de la solicitud
   const userData = req.body;
 
-  // Realizar validación en el backend antes de guardar en la base de datos
   if (
     userData.dni &&
     userData.nombres &&
@@ -51,13 +47,11 @@ router.post('/adduser', (req, res) => {
     userData.banco &&
     userData.numero_cci
   ) {
-    // Construir la consulta SQL de inserción
     const insertQuery = `
       INSERT INTO clientes (dni, nombres, apellidos, fecha_nacimiento, celular, correo, banco, numero_cci)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    // Parámetros para la consulta preparada
     const params = [
       userData.dni,
       userData.nombres,
@@ -69,7 +63,6 @@ router.post('/adduser', (req, res) => {
       userData.numero_cci
     ];
 
-    // Ejecutar la consulta preparada
     db.run(insertQuery, params, function (err) {
       if (err) {
         console.error('Error al insertar usuario en la base de datos', err.message);
@@ -80,7 +73,6 @@ router.post('/adduser', (req, res) => {
       }
     });
   } else {
-    // Enviar respuesta de error al frontend si los datos no son válidos
     res.status(400).json({ success: false, message: 'Datos de usuario no válidos' });
   }
 });
