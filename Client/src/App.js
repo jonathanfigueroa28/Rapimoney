@@ -19,6 +19,10 @@ const App = () => {
   const [classButton, setClassButton] = useState("add");
   const [textButton, setTextButton] = useState("Agregar Usuario");
   const [visibleUsers, setVisibleUsers] = useState(10);
+  const [search, setSearch] = useState({
+    tipo: '',
+    busqueda: ''
+  });
 
   useEffect(() => {
     $.ajax({
@@ -52,6 +56,36 @@ const App = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const handleInputChangeSearch = (e) => {
+    setSearch({
+      ...search,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSearch = (e) => {
+    console.log(search);
+    e.preventDefault();
+    if (search.tipo && search.busqueda) {
+      $.ajax({
+        url: 'http://localhost:3001/api/user/searchuser',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(search),
+        success: function (data) {
+          setUsers(data);
+          if(data.length === 0){
+            alert('No se encontraron resultados');
+          }
+        },
+        error: function (error) {
+          console.error('Error al obtener datos de usuarios:', error);
+        }
+      });
+    } else {
+      console.error('Campos no válidos en el formulario', search);
+    }
+  };
+
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -121,6 +155,18 @@ const App = () => {
         )}
       </div>
       <h2>Lista de usuarios</h2>
+      <div>
+        <label htmlFor="tipo">Tipo de busqueda</label>
+        <select name="tipo" id="tipo" value={search.tipo} onChange={handleInputChangeSearch}>
+          <option value="dni">Busqueda por DNI</option>
+          <option value="nombres">Busqueda por NOMBRES</option>
+        </select>
+        <label htmlFor="busqueda">Busqueda</label>
+        <input type="text" name="busqueda" id="busqueda" value={search.busqueda} onChange={handleInputChangeSearch}/>
+        
+      </div>
+      <button onClick={handleSearch}>Buscar</button>
+        
       <table border="1">
         <thead>
           <tr>

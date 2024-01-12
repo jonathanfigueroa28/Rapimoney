@@ -26,7 +26,7 @@ router.get('/getusers', (req, res) => {
 router.post('/searchuser', (req, res) => {
   // Aquí debes obtener los datos de usuarios desde tu base de datos o alguna otra fuente
   const Datos = req.body;
-  db.all(`SELECT * FROM clientes WHERE ${Datos.tipo} like ${Datos.busqueda}%`, (err, users) => {
+  db.all(`SELECT * FROM clientes WHERE ${Datos.tipo} like '${Datos.busqueda}%'`, (err, users) => {
     if (err) {
       console.error('Error al ejecutar la consulta', err.message);
     } else {
