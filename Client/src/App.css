@@ -79,6 +79,23 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
   background-color: #1565c0;
 }
+.seemore {
+  background-color: #4caf50; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  padding: 10px 15px; /* Relleno interno */
+  text-align: center; /* Alineación de texto */
+  text-decoration: none; /* Sin subrayado */
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.seemore:hover {
+  background-color: #45a049; /* Cambiar color de fondo al pasar el ratón */
+}
 
 /* Media Query para pantallas pequeñas (ej. teléfonos) */
 @media only screen and (max-width: 600px) {

@@ -17,36 +17,26 @@ const App = () => {
     numero_cci: ''
   });
   const [classButton, setClassButton] = useState("add");
-  const [textButton, setTextButton] = useState("Agregar Usuario"); 
+  const [textButton, setTextButton] = useState("Agregar Usuario");
+  const [visibleUsers, setVisibleUsers] = useState(10);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (token === null) {
-      // Si no hay token, redirige al usuario al componente de inicio de sesión
-      // Puedes utilizar un hook de enrutamiento (como react-router-dom) para manejar la redirección
-      // Esto es un ejemplo simple sin enrutamiento
-      window.location.href = '/login';
-      return;
-    }
-    // Realizar solicitud HTTP al servidor Express usando jQuery AJAX
     $.ajax({
       url: 'http://localhost:3001/api/user/getusers',
       method: 'GET',
       dataType: 'json',
       success: function (data) {
-        // Actualizar el estado con los datos recibidos
         setUsers(data);
       },
       error: function (error) {
         console.error('Error al obtener datos de usuarios:', error);
       },
     });
-  },[] ); 
+  }, []); 
 
   const handleToggleForm = () => {
     setShowForm(!showForm);
-  
+
     if (!showForm) {
       setClassButton("close");
       setTextButton("Cerrar");
@@ -95,31 +85,36 @@ const App = () => {
       console.error('Campos no válidos en el formulario', formData);
     }
   };
+
+  const handleSeeMore = () => {
+    setVisibleUsers(prevVisibleUsers => prevVisibleUsers + 10);
+  };
+
   return (
     <div>
       <h1>Bienvenido admin</h1>
       <div>
-      <button className={classButton} onClick={handleToggleForm}> {textButton} </button>
-      {showForm && (
+        <button className={classButton} onClick={handleToggleForm}> {textButton} </button>
+        {showForm && (
           <div>
             <h2>Formulario de registro</h2>
             <form onSubmit={handleSubmitForm}>
               <label htmlFor="dni">DNI</label>
-              <input type="text" id="dni" name="dni" value={formData.dni} onChange={handleInputChange} />
-              <label htmlFor="nombres">Nombre</label>
-              <input type="text" id="nombres" name="nombres" value={formData.nombres} onChange={handleInputChange} />
+              <input type="text" name="dni" id="dni" value={formData.dni} onChange={handleInputChange} />
+              <label htmlFor="nombres">Nombres</label>
+              <input type="text" name="nombres" id="nombres" value={formData.nombres} onChange={handleInputChange} />
               <label htmlFor="apellidos">Apellidos</label>
-              <input type="text" id="apellidos" name="apellidos" value={formData.apellidos} onChange={handleInputChange} />
+              <input type="text" name="apellidos" id="apellidos" value={formData.apellidos} onChange={handleInputChange} />
               <label htmlFor="fecha_nacimiento">Fecha de nacimiento</label>
-              <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleInputChange} />
+              <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleInputChange} />
               <label htmlFor="celular">Celular</label>
-              <input type="text" id="celular" name="celular" value={formData.celular} onChange={handleInputChange} />
+              <input type="text" name="celular" id="celular" value={formData.celular} onChange={handleInputChange} />
               <label htmlFor="correo">Correo</label>
-              <input type="text" id="correo" name="correo" value={formData.correo} onChange={handleInputChange} />
+              <input type="text" name="correo" id="correo" value={formData.correo} onChange={handleInputChange} />
               <label htmlFor="banco">Banco</label>
-              <input type="text" id="banco" name="banco" value={formData.banco} onChange={handleInputChange} />
+              <input type="text" name="banco" id="banco" value={formData.banco} onChange={handleInputChange} />
               <label htmlFor="numero_cci">Numero de cuenta</label>
-              <input type="text" id="numero_cci" name="numero_cci" value={formData.numero_cci} onChange={handleInputChange} />
+              <input type="text" name="numero_cci" id="numero_cci" value={formData.numero_cci} onChange={handleInputChange} />
               <button type="submit">Enviar</button>
             </form>
           </div>
@@ -140,7 +135,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
+          {users.slice(0, visibleUsers).map(user => (
             <tr key={user.dni}>
               <td>{user.dni}</td>
               <td>{user.nombres}</td>
@@ -154,7 +149,9 @@ const App = () => {
           ))}
         </tbody>
       </table>
-      
+      {visibleUsers < users.length && (
+        <button className='seemore' onClick={handleSeeMore}>Ver más</button>
+      )}
     </div>
   );
 };
